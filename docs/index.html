@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Minecraftワールド配布ページ">
+  <title>Minecraft World Downloads</title>
+  <style>
+    :root {
+      --page: #f5f5f3;
+      --surface: #ffffff;
+      --ink: #171717;
+      --muted: #666661;
+      --line: #deded9;
+      --button: #222220;
+      --button-hover: #3a3a36;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+      isolation: isolate;
+      background: #dce5ec;
+      color: var(--ink);
+      font-family: "Yu Gothic UI", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      line-height: 1.65;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -2;
+      inset: -10px;
+      background: url("images/site-background.jpg") center / cover no-repeat;
+      content: "";
+      filter: blur(3px);
+      transform: scale(1.018);
+    }
+
+    body::after {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(12, 27, 38, 0.06), rgba(12, 27, 38, 0.12));
+      content: "";
+    }
+
+    .container {
+      width: min(1060px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 56px 0 72px;
+    }
+
+    header {
+      margin-bottom: 38px;
+      max-width: 720px;
+      padding: 26px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 16px 44px rgba(31, 47, 59, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    h1, h2, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(1.85rem, 4vw, 2.7rem);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .lead, .notice, .edition-note { color: var(--muted); }
+
+    .world-list { display: grid; gap: 18px; }
+
+    .world-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 14px 40px rgba(31, 47, 59, 0.1);
+      backdrop-filter: blur(14px);
+    }
+
+    .world-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 34px;
+    }
+
+    .world-info h2 {
+      margin-bottom: 12px;
+      font-size: 1.42rem;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      border: 1px solid rgba(25, 56, 76, 0.16);
+      border-radius: 999px;
+      background: #e8f0f5;
+      color: #24485f;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.015em;
+    }
+
+    .badge.is-human { background: #f2ede5; color: #654f34; }
+
+    .download-actions { display: grid; gap: 10px; }
+
+    .download-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid var(--button);
+      border-radius: 9px;
+      background: var(--button);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 160ms ease;
+    }
+
+    .download-button:hover { background: var(--button-hover); }
+    .download-button span:last-child { font-size: 0.9rem; font-weight: 500; opacity: 0.76; }
+
+    .download-button.is-pending {
+      border-color: var(--line);
+      background: #e9e9e5;
+      color: #777773;
+      cursor: not-allowed;
+    }
+
+    .edition-note { margin: 13px 0 0; font-size: 0.88rem; }
+
+    .preview-media {
+      margin: 0;
+      min-height: 272px;
+      overflow: hidden;
+      background: #dfe5e9;
+    }
+
+    .preview-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 272px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    footer {
+      margin-top: 44px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 28px, 620px); padding-top: 32px; }
+      header { padding: 22px; }
+      .world-card { grid-template-columns: 1fr; }
+      .world-info { padding: 26px; }
+      .preview-media { min-height: 220px; order: -1; }
+      .preview-media img { min-height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Minecraft ワールド配布</h1>
+      <p class="lead">ダウンロードしたい建物と、遊んでいるMinecraftの版を選んでください。</p>
+    </header>
+
+    <section class="world-list" aria-label="配布ワールド一覧">
+      <article class="world-card" id="city-featured-in-video">
+        <div class="world-info">
+          <h2>動画で出てた街</h2>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/city-featured-in-video-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/city-featured-in-video-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/city-featured-in-video.jpg" alt="動画で出てた街の全景" width="1920" height="1080" fetchpriority="high"></figure>
+      </article>
+
+      <article class="world-card" id="toranomon-hills-station-tower">
+        <div class="world-info">
+          <h2>虎ノ門ヒルズステーションタワー</h2>
+          <div class="badges"><span class="badge">AI建築</span><span class="badge is-human">一部人間手直し</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/toranomon-hills-station-tower-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/toranomon-hills-station-tower-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/toranomon-hills-station-tower.jpg" alt="虎ノ門ヒルズステーションタワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="azabudai-hills-mori-tower">
+        <div class="world-info">
+          <h2>麻布台ヒルズ森タワー</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/azabudai-hills-mori-tower-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/azabudai-hills-mori-tower-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/azabudai-hills-mori-tower.jpg" alt="麻布台ヒルズ森タワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="nagoya-station-towers">
+        <div class="world-info">
+          <h2>名古屋駅・JRセントラルタワーズ・JRゲートタワー</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/nagoya-station-central-gate-towers-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/nagoya-station-central-gate-towers-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/nagoya-station-central-gate-towers.jpg" alt="名古屋駅・JRセントラルタワーズ・JRゲートタワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="nagoya-lucent-tower">
+        <div class="world-info">
+          <h2>名古屋ルーセントタワー</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/nagoya-lucent-tower-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/nagoya-lucent-tower-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/nagoya-lucent-tower.jpg" alt="名古屋ルーセントタワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="tokyo-midtown-tower">
+        <div class="world-info">
+          <h2>東京ミッドタウンタワー</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/tokyo-midtown-tower-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/tokyo-midtown-tower-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/tokyo-midtown-tower.jpg" alt="東京ミッドタウンタワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="yokohama-landmark-tower">
+        <div class="world-info">
+          <h2>横浜ランドマークタワー</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/yokohama-landmark-tower-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/yokohama-landmark-tower-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/yokohama-landmark-tower.jpg" alt="横浜ランドマークタワーのMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+
+      <article class="world-card" id="tokyo-metropolitan-government-building-no-1">
+        <div class="world-info">
+          <h2>東京都庁第一本庁舎</h2>
+          <div class="badges"><span class="badge">AI建築</span></div>
+          <div class="download-actions">
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/tokyo-metropolitan-government-building-no-1-bedrock.mcworld"><span>統合版をダウンロード</span><span>.mcworld</span></a>
+            <a class="download-button" href="https://github.com/Makou-Energy-Gamer/minecraft-world-download/releases/download/v1.0.0/tokyo-metropolitan-government-building-no-1-java.zip"><span>Java版をダウンロード</span><span>.zip</span></a>
+          </div>
+        </div>
+        <figure class="preview-media"><img src="images/tokyo-metropolitan-government-building-no-1.jpg" alt="東京都庁第一本庁舎のMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
+      </article>
+    </section>
+
+    <footer>魔晄エネルギーゲーマー / Minecraft World Downloads</footer>
+  </main>
+</body>
+</html>
