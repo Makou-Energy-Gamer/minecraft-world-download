@@ -76,6 +76,27 @@
 
     .lead, .notice, .edition-note { color: var(--muted); }
 
+    .help-link-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin: -22px 2px 18px;
+    }
+
+    .help-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .help-link:hover { color: var(--ink); }
+
     .world-list { display: grid; gap: 18px; }
 
     .world-card {
@@ -174,6 +195,7 @@
       object-position: center;
     }
 
+    .usage-note,
     .credits {
       margin-top: 44px;
       padding: 24px 26px;
@@ -187,13 +209,22 @@
       line-height: 1.75;
     }
 
+    .usage-note {
+      margin-top: 28px;
+      padding: 19px 22px;
+      font-size: 0.82rem;
+    }
+
+    .usage-note h2,
     .credits h2 {
       margin-bottom: 10px;
       color: var(--text);
       font-size: 1rem;
     }
 
+    .usage-note p,
     .credits p { margin-bottom: 8px; }
+    .usage-note p:last-of-type,
     .credits p:last-of-type { margin-bottom: 0; }
     .credits a { color: inherit; text-underline-offset: 0.18em; }
 
@@ -210,6 +241,8 @@
       .world-info { padding: 26px; }
       .preview-media { min-height: 220px; order: -1; }
       .preview-media img { min-height: 220px; }
+      .help-link-wrap { margin-top: -20px; }
+      .usage-note,
       .credits { padding: 20px; }
     }
   </style>
@@ -219,6 +252,10 @@
     <header>
       <h1>Minecraft ワールド配布</h1>
     </header>
+
+    <div class="help-link-wrap">
+      <a class="help-link" href="guide.html" target="_blank" rel="noopener">導入方法がわからない方へ</a>
+    </div>
 
     <section class="world-list" aria-label="配布ワールド一覧">
       <article class="world-card" id="city-featured-in-video">
@@ -316,6 +353,12 @@
         <figure class="preview-media"><img src="images/tokyo-metropolitan-government-building-no-1.jpg" alt="東京都庁第一本庁舎のMinecraft建築" width="1920" height="1080" loading="lazy"></figure>
       </article>
     </section>
+
+    <aside class="usage-note" aria-labelledby="usage-title">
+      <h2 id="usage-title">利用について</h2>
+      <p>個人で遊ぶ・自分用に改変する利用や、個人の動画・配信での使用（YouTube等の通常の広告収益を含む）は可能です。動画等で使用する場合は、概要欄などに「魔晄エネルギーゲーマー」とこの配布ページのURLを記載してください。</p>
+      <p>配布ファイルや改変版の再配布・販売、企業・団体の広告・宣伝目的での利用、自作発言はご遠慮ください。環境によって動作が異なる場合があるため、大切なデータはバックアップしてご利用ください。</p>
+    </aside>
 
     <aside class="credits" aria-labelledby="credits-title">
       <h2 id="credits-title">出典・ライセンス</h2>
